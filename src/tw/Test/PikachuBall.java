@@ -366,7 +366,6 @@ class GamePanel extends JPanel {
 				ballDx *= -1;
 				ballDy *= -1;
 			}
-			
 		    }
 
 //			Player碰撞牆壁判定
