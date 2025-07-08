@@ -1,0 +1,9 @@
+命令提示字元
+
+cd 路徑複製貼上
+mysql -u -root -p
+密碼：root
+
+exit可以離開
+mysql -u -root -p  再次進入
+show databases;
