@@ -7,10 +7,34 @@ import java.util.Objects;
 public class Member {
 	private int id;
 	private String name;
+	private String passwd;	// plain or hash => plain
+	private String account;
 	
-	public Member(int id, String name){
+	public Member(int id, String name, String passwd, String account){
 		this.id = id; this.name = name;
+		this.passwd = passwd; this.account = account;
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPasswd() {
+		return passwd;
+	}
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
+	public String getAccount() {
+		return account;
+	}
+	
 	
 //	equals() 用來比對兩個物件是否相等，用 id 比較
 //	hashCode() 用整數雜湊值來表示該物件，同樣依賴 id

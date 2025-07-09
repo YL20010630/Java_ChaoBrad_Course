@@ -21,10 +21,10 @@ public class lab37 {
 		System.out.println(list.get(2));
 		System.out.println("------------");
 		
-		Member m2 = new Member(2, "Betty");
-		Member m3 = new Member(2, "Cindy");
-		Member m4 = new Member(1, "David");
-		Member m1 = new Member(1, "Andy");
+		Member m2 = new Member(2, "Betty", "", "");
+		Member m3 = new Member(2, "Cindy", "", "");
+		Member m4 = new Member(1, "David", "", "");
+		Member m1 = new Member(1, "Andy", "", "");
 		LinkedList<Member> ms = new LinkedList<>();
 		ms.add(m1);
 		ms.add(m2);

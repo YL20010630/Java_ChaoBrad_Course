@@ -1,0 +1,94 @@
+--------------------------------------
+
+SELECT     -- ① 選要顯示的欄位
+FROM       -- ② 從哪個資料表查詢
+WHERE      -- ③ 篩選資料（每一筆 row）
+GROUP BY   -- ④ 分組（用來搭配聚合函數 like SUM, COUNT）
+HAVING     -- ⑤ 篩選分組後的結果（不能用 WHERE 的聚合條件）
+ORDER BY   -- ⑥ 排序輸出結果
+
+--------------------------------------
+
+GROUP BY：用於某欄位內多個相同值合併計算
+HAVING：GROUP BY後代替WHERE使用
+
+--------------------------------------
+找出總銷售量低於200的商品
+SELECT ProductID, sum(Quantity) sum FROM `orderdetails`
+GROUP BY ProductID
+HAVING sum < 200
+
++-----------+------+
+| ProductID | sum  |
++-----------+------+
+|         9 |   95 |
+|        15 |  122 |
+|        37 |  125 |
+|        48 |  138 |
+|        67 |  184 |
++-----------+------+
+驗算
+SELECT ProductID, sum(Quantity) sum FROM `orderdetails`
+WHERE ProductID = 9
+--------------------------------------
+各商品的平均單價
+SELECT ProductID, AVG(UnitPrice) avg FROM `orderdetails`
+GROUP BY ProductID
+ORDER BY ProductID
+------------------------------
+找到下單次數超過20次的顧客名
+SELECT CustomerID, count(OrderID) count FROM `orders`
+GROUP BY CustomerID
+HAVING count > 20
+ORDER BY count DESC
+---------------------------------
+找到有訂單日期為1997年的公司名
+SELECT CompanyName FROM `customers` 
+WHERE CustomerID IN
+(
+    SELECT CustomerID FROM orders
+    WHERE OrderDate BETWEEN '1997-01-01' AND '1997-12-31'
+)
+
+也可以用模糊查詢，但沒有between精準
+ WHERE OrderDate LIKE '1997%'
+-------------------------
+找到聯絡人姓名為此的產品及供應商ID
+Charlotte Cooper, Mayumi Ohno
+
+SELECT ProductName, SupplierID FROM `products` 
+WHERE SupplierID IN
+(
+	SELECT SupplierID FROM suppliers
+    WHERE ContactName IN ('Charlotte Cooper')
+)
+-------------------------
+
+子類別，XXX部分要相同，代表連接的欄位
+WHERE XXX IN
+(SELECT XXX FROM a WHERE B)
+
+-------------------------
+找到海產類產品
+SELECT ProductName FROM `products` 
+WHERE CategoryID = 
+(SELECT CategoryID FROM categories WHERE CategoryName = 'Seafood')
+
+這裡不用WHERE CategoryID IN
+是因為 = 用來比對單一值
+IN 用來比較多個值
+每個CategoryID欄位的值在categories表裡都不重複
+-----------------------------
+
+找到海產供應商
+SELECT CompanyName, ContactName, Phone
+FROM suppliers
+WHERE SupplierID IN
+(
+	SELECT SupplierID FROM products
+	WHERE CategoryID = 
+	(
+		SELECT CategoryID FROM categories
+		WHERE CategoryName = 'Seafood'
+	)
+)

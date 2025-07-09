@@ -12,10 +12,10 @@ public class lab36 {
 //		Member m3 = new Member(3, "Cindy");
 //		Member m4 = new Member(4, "David");
 		
-		Member m1 = new Member(1, "Andy");
-		Member m2 = new Member(2, "Betty");
-		Member m3 = new Member(2, "Cindy");
-		Member m4 = new Member(1, "David");
+		Member m1 = new Member(1, "Andy", "", "");
+		Member m2 = new Member(2, "Betty", "", "");
+		Member m3 = new Member(2, "Cindy", "", "");
+		Member m4 = new Member(1, "David", "", "");
 		
 //		泛型：在指定資料結構裡面只能放什麼元素
 //		Hash 雜湊 
